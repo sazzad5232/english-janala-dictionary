@@ -2,6 +2,12 @@ const createElement = (arr) => {
   const htmlElements = arr.map((el) => `<span class="btn">${el}</span>`);
   return htmlElements.join(" ");
 };
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const manageSpinner = (status) => {
   if (status == true) {
     document.getElementById("spinner").classList.remove("hidden");
@@ -74,7 +80,9 @@ const displayLevelWord = (words) => {
           })" class="btn bg-[#1a91ff10] hover:bg-[#1a91ff80]">
             <i class="fa-solid fa-circle-info"></i>
           </button>
-          <button class="btn bg-[#1a91ff10] hover:bg-[#1a91ff80]">
+          <button onclick="pronounceWord('${
+            word.word
+          }')" class="btn bg-[#1a91ff10] hover:bg-[#1a91ff80]">
             <i class="fa-solid fa-volume-high"></i>
           </button>
         </div>
